@@ -11,9 +11,14 @@ const forecast = (latitude,longitude, callback) => {
         } else {
             const currentTemp = body.currently.temperature
             const precipChance = body.currently.precipProbability
+            const sunriseTime = new Date(body.daily.data[0].sunriseTime*1000)
+            const sunsetTime = new Date(body.daily.data[0].sunsetTime*1000)
             const summary = body.daily.data[0].summary
             callback(undefined, {
-            data: summary + ' The current temperature is ' + currentTemp + ' degrees (C), and there is ' + precipChance + '% chance of rain.'
+            data: summary + "\
+            The current temperature is " + currentTemp + " degrees (C). \
+            There is " + precipChance + "% chance of rain. \ \
+            The sunrise time is " + sunriseTime + ", and sunset time is " + sunsetTime + "."
             })
         }
     })
